@@ -30,7 +30,23 @@ const pixelFormat = enum(u8) {
     bA888 = 32,
 };
 
-const blitState = enum { dead, alive, dying, anim_done };
+const blitState = enum {
+    dead,
+    alive,
+    dying,
+    anim_done,
+};
+
+const screenTransitions = enum {
+    darkness,
+    whiteness,
+    swipe_x,
+    swipe_y,
+    disolve,
+    scrunch,
+    redness,
+    greennes,
+};
 
 const Window = struct {
     screen_height: u16,
