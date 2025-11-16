@@ -52,3 +52,11 @@ pub inline fn swap(a: anytype, b: @TypeOf(a), temp: @TypeOf(a)) @TypeOf(a) {
     a = b;
     b = temp;
 }
+
+pub inline fn degToRad(ang: f32) f32 {
+    return ang * PI / 180;
+}
+
+pub inline fn radToDeg(rads: f32) f32 {
+    return rads * 180 / PI;
+}
