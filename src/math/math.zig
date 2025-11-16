@@ -29,3 +29,26 @@ pub inline fn rgb24bit(_: u8, r: u8, g: u8, b: u8) u24 {
 pub inline fn rgb32bit(a: u8, r: u8, g: u8, b: u8) u32 {
     return ((b) + (@as(u16, g) << 8) + (@as(u24, r) << 16) + (@as(u32, a) << 24));
 }
+
+// bit manipulation through bit masking
+pub inline fn setBit(word: anytype, bit_flag: @TypeOf(word.*)) void {
+    word.* |= bit_flag;
+}
+
+pub inline fn resetBit(word: anytype, bit_flag: @TypeOf(word)) void {
+    word.* &= ~bit_flag;
+}
+
+pub inline fn min(a: anytype, b: @TypeOf(a)) @TypeOf(a) {
+    return if (a < b) a else b;
+}
+
+pub inline fn max(comptime T: type, a: T, b: T) T {
+    return if (a > b) b else a;
+}
+
+pub inline fn swap(a: anytype, b: @TypeOf(a), temp: @TypeOf(a)) @TypeOf(a) {
+    temp = a;
+    a = b;
+    b = temp;
+}
