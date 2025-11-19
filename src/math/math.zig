@@ -60,3 +60,43 @@ pub inline fn degToRad(ang: f32) f32 {
 pub inline fn radToDeg(rads: f32) f32 {
     return rads * 180 / PI;
 }
+
+pub inline fn randRange(rng: *@import("std").Random, x: anytype, y: @TypeOf(x)) @TypeOf(x) {
+    const rMin = min(x, y);
+    const rMax = max(x, y);
+
+    return rng.intRangeAtMost(@TypeOf(x), rMin, rMax);
+}
+
+const Vector3D = union { M: [3]f32, xyz: struct { x: f32, y: f32, z: f32 } };
+
+pub fn Vec2(comptime T: type) type {
+    return union {
+        m: [2]T,
+        xy: struct { x: T, y: T },
+    };
+}
+
+pub fn Vec3(comptime T: type) type {
+    return union {
+        m: [3]T,
+        xyz: struct { x: T, y: T, z: T },
+    };
+}
+
+pub fn Vec4(comptime T: type) type {
+    return union {
+        m: [4]T,
+        xzyw: struct { x: T, y: T, z: T, w: T },
+    };
+}
+
+pub fn Vert2(comptime T: type) type {
+    return struct { x: T, y: T };
+}
+
+test "nothing" {
+    const vec3 = Vector3D.xyz;
+
+    vec3.x;
+}
